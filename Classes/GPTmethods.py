@@ -167,49 +167,6 @@ class GPTmethods:
 
         return {"status": True, "data": 'Prediction have successfully been'}
 
-    """
-    Upload Dataset for GPT Fine-tuning
-    """
-
-    def upload_file(self, dataset):
-        upload_file = openai.File.create(
-            file=open(dataset, "rb"),
-            purpose='fine-tune'
-        )
-        return upload_file
-
-    """
-    Train GPT model
-    """
-
-    def train_gpt(self, file_id):
-        # https://www.mlq.ai/gpt-3-5-turbo-fine-tuning/
-        # https://platform.openai.com/docs/guides/fine-tuning/create-a-fine-tuned-model?ref=mlq.ai
-        return openai.FineTuningJob.create(training_file=file_id, model="gpt-4-0125-preview")
-        # check training status (optional)
-        # openai.FineTuningJob.retrieve(file_id)
-
-    """
-    Delete Fine-Tuned GPT model
-    """
-
-    def delete_finetuned_model(self, model):  # ex. model = ft:gpt-4-0125-preview-0613:personal::84kpHoCN
-        return openai.Model.delete(model)
-
-    """
-    Cancel Fine-Tuning
-    """
-
-    def cancel_gpt_finetuning(self, train_id):  # ex. id = ftjob-3C5lZD1ly5OHHAleLwAqT7Qt
-        return openai.FineTuningJob.cancel(train_id)
-
-    """
-    Get all Fine-Tuned models and their status
-    """
-
-    def get_all_finetuned_models(self):
-        return openai.FineTuningJob.list(limit=10)
-
 
 # Example Usage
 # Configure logging to write to a file
