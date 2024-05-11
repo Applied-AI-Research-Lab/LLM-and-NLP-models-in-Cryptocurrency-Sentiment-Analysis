@@ -198,6 +198,8 @@ print(f'base:gpt-4-0125-preview: ' + str(EVM.evaluate_results('sentiment', 'gpt_
 print(f'ft:gpt-4: ' + str(EVM.evaluate_results('sentiment', 'gpt_ft_prediction', 'ft:gpt-4')))
 print(f'ft:bert-adamw: ' + str(EVM.evaluate_results('sentiment', 'bert__adamw_ft_prediction', 'ft:bert-adamw')))
 print(f'ft:bert-adam: ' + str(EVM.evaluate_results('sentiment', 'bert__adam_ft_prediction', 'ft:bert-adam')))
+print(f'ft:finbert-adamw: ' + str(EVM.evaluate_results('sentiment_numerical_fin', 'finbert_adamw_ft_prediction', 'ft:finbert-adamw')))
+print(f'ft:finbert-adam: ' + str(EVM.evaluate_results('sentiment_numerical_fin', 'finbert_adam_ft_prediction', 'ft:finbert-adam')))
 
 # Create scatterplots
 # print(EVM.scatterplot(original_column='sentiment', prediction_column='gpt_bm_prediction'))
@@ -219,6 +221,8 @@ print(f'ft:bert-adam: ' + str(EVM.evaluate_results('sentiment', 'bert__adam_ft_p
 # print(EVM.plot_stacked_bar_chart(original_column='sentiment', prediction_column='gpt_ft_prediction'))
 # print(EVM.plot_stacked_bar_chart(original_column='sentiment', prediction_column='bert__adamw_ft_prediction'))
 # print(EVM.plot_stacked_bar_chart(original_column='sentiment', prediction_column='bert__adam_ft_prediction'))
+# print(EVM.plot_stacked_bar_chart(original_column='sentiment_numerical_fin', prediction_column='finbert_adamw_ft_prediction'))
+# print(EVM.plot_stacked_bar_chart(original_column='sentiment_numerical_fin', prediction_column='finbert_adam_ft_prediction'))
 
 # Plot a grouped bar chart showing the relationship between labels in two columns
 # print(EVM.plot_grouped_bar_chart(original_column='sentiment', prediction_column='gpt_bm_prediction'))
