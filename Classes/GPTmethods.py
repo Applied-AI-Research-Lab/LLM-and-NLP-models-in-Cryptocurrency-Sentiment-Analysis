@@ -7,7 +7,7 @@ import logging
 
 
 class GPTmethods:
-    def __init__(self, model_id='gpt-3.5-turbo'):
+    def __init__(self, model_id='gpt-4-0125-preview'):
         openai.api_key = os.environ.get("OPENAI_API_KEY")  # Access environment variable
         self.model_id = model_id
         self.pre_path = 'Datasets/'
@@ -33,7 +33,7 @@ class GPTmethods:
                                     row['text'] + ''},
                         {"role": "assistant", "content": '{"sentiment":"' + str(row['sentiment']) + '"}'}
                     ]
-                }  # TODO! Change it!
+                }
             )
 
         output_file_path = self.pre_path + "ft_dataset_gpt_" + data_type + ".jsonl"  # Define the path
@@ -62,31 +62,7 @@ class GPTmethods:
     """
     Clean the response
     """
-
-    # def clean_response(self, response, a_field):
-    #     # Search for JSON in the response
-    #     start_index = response.find('{')
-    #     end_index = response.rfind('}')
-    #
-    #     if start_index != -1 and end_index != -1:
-    #         json_str = response[start_index:end_index + 1]
-    #         try:
-    #             # Attempt to load the extracted JSON string
-    #             json_data = json.loads(json_str)
-    #             return {"status": True, "data": json_data}
-    #         except json.JSONDecodeError as e:
-    #             # If an error occurs during JSON parsing, handle it
-    #             logging.error(f"An error occurred while decoding JSON: '{str(e)}'. The input '{a_field}', "
-    #                           f"resulted in the following response: {response}")
-    #             return {"status": False,
-    #                     "data": f"An error occurred while decoding JSON: '{str(e)}'. The input '{a_field}', "
-    #                             f"resulted in the following response: {response}"}
-    #     else:
-    #         logging.error(f"No JSON found in the response. The input '{a_field}', resulted in the "
-    #                       f"following response: {response}")
-    #         return {"status": False, "data": f"No JSON found in the response. The input '{a_field}', "
-    #                                          f"resulted in the following response: {response}"}
-
+    
     def clean_response(self, response, a_field):
         try:
             # Attempt to parse the JSON string
@@ -113,15 +89,15 @@ class GPTmethods:
     def gpt_prediction(self, input):
         conversation = []
         conversation.append({'role': 'system',
-                             'content': "You are a crypto expert."})  # TODO! Change it!
+                             'content': "You are a crypto expert."})
         conversation.append({'role': 'user',
                              'content': 'Evaluate the sentiment of the news article. Return your response in JSON format {"sentiment": "negative"} or {"sentiment": "neutral"} or {"sentiment": "positive"}. Article:\n' +
-                                        input['text'] + ''})  # TODO! Change it!
+                                        input['text'] + ''})
         conversation = self.gpt_conversation(conversation)  # Get the response from GPT model
         content = conversation.content
 
         # Clean the response and return
-        return self.clean_response(response=content, a_field=input['text'])  # TODO! Change it!
+        return self.clean_response(response=content, a_field=input['text'])
 
     """
     Make predictions for a specific data_set appending a new prediction_column
@@ -146,7 +122,7 @@ class GPTmethods:
             # If not, add the column to the DataFrame with pd.NA as the initial value
             df[prediction_column] = pd.NA
 
-            # # Explicitly set the column type to a nullable integer   # TODO! For non-int values omit this if
+            # # Explicitly set the column type to a nullable integer
             # df = df.astype({prediction_column: 'Int64'})
 
         # Update the CSV file with the new header (if columns were added)
@@ -167,27 +143,27 @@ class GPTmethods:
                 else:
                     print(prediction)
 
-                    if prediction['data']['sentiment'] != '':  # TODO! Change it!
+                    if prediction['data']['sentiment'] != '':
                         # Update the DataFrame with the evaluation result
-                        df.at[index, prediction_column] = prediction['data']['sentiment']  # TODO! Change it!
+                        df.at[index, prediction_column] = prediction['data']['sentiment']
                         # for integers only
-                        # df.at[index, prediction_column] = int(prediction['data']['sentiment'])  # TODO! Change it!
+                        # df.at[index, prediction_column] = int(prediction['data']['sentiment'])
 
                         # Update the CSV file with the new evaluation values
                         df.to_csv(self.pre_path + data_set, index=False)
                     else:
                         logging.error(
                             f"No rating instance was found within the data for '{row['text']}', and the "
-                            f"corresponding prediction response was: {prediction}.")  # TODO! Change it!
+                            f"corresponding prediction response was: {prediction}.")
                         return {"status": False,
                                 "data": f"No rating instance was found within the data for '{row['text']}', "
-                                        f"and the corresponding prediction response was: {prediction}."}  # TODO! Change it!
+                                        f"and the corresponding prediction response was: {prediction}."}
 
                 # break
             # Add a delay of 5 seconds (reduced for testing)
 
         # Change the column datatype after processing all predictions to handle 2.0 ratings
-        # df[prediction_column] = df[prediction_column].astype('Int64')    # TODO! For non-int values omit this if
+        # df[prediction_column] = df[prediction_column].astype('Int64')
 
         return {"status": True, "data": 'Prediction have successfully been'}
 
@@ -209,7 +185,7 @@ class GPTmethods:
     def train_gpt(self, file_id):
         # https://www.mlq.ai/gpt-3-5-turbo-fine-tuning/
         # https://platform.openai.com/docs/guides/fine-tuning/create-a-fine-tuned-model?ref=mlq.ai
-        return openai.FineTuningJob.create(training_file=file_id, model="gpt-3.5-turbo")
+        return openai.FineTuningJob.create(training_file=file_id, model="gpt-4-0125-preview")
         # check training status (optional)
         # openai.FineTuningJob.retrieve(file_id)
 
@@ -217,7 +193,7 @@ class GPTmethods:
     Delete Fine-Tuned GPT model
     """
 
-    def delete_finetuned_model(self, model):  # ex. model = ft:gpt-3.5-turbo-0613:personal::84kpHoCN
+    def delete_finetuned_model(self, model):  # ex. model = ft:gpt-4-0125-preview-0613:personal::84kpHoCN
         return openai.Model.delete(model)
 
     """
