@@ -11,6 +11,8 @@ class EvaluationMethods:
         self.dataset_path = dataset_path
         self.pre_path = '../Datasets/'
 
+    from sklearn.metrics import precision_score, recall_score, f1_score
+
     def evaluate_results(self, original, prediction, model_name):
         data = pd.read_csv(self.pre_path + self.dataset_path)
 
@@ -21,9 +23,16 @@ class EvaluationMethods:
 
         # Calculate classification metrics
         accuracy = round(accuracy_score(data[original], data[prediction]), 4)
-        precision = round(precision_score(data[original], data[prediction], average='weighted'), 4)
-        recall = round(recall_score(data[original], data[prediction], average='weighted'), 4)
-        f1 = round(f1_score(data[original], data[prediction], average='weighted'), 4)
+
+        # Calculate precision, recall, and F1-score for each class separately
+        precision = precision_score(data[original], data[prediction], average=None)
+        precision = [round(p, 2) for p in precision]
+
+        recall = recall_score(data[original], data[prediction], average=None)
+        recall = [round(r, 2) for r in recall]
+
+        f1 = f1_score(data[original], data[prediction], average=None)
+        f1 = [round(f, 2) for f in f1]
 
         # Calculate Mean Absolute Error (MAE) for regression evaluation
         mae = mean_absolute_error(data[original], data[prediction])
@@ -32,9 +41,15 @@ class EvaluationMethods:
         evaluation_df = pd.DataFrame({
             'Model': [model_name],
             'Accuracy': [accuracy],
-            'Precision': [precision],
-            'Recall': [recall],
-            'F1': [f1],
+            'Precision_Class_0': [precision[0]],
+            'Precision_Class_1': [precision[1]],
+            'Precision_Class_2': [precision[2]],
+            'Recall_Class_0': [recall[0]],
+            'Recall_Class_1': [recall[1]],
+            'Recall_Class_2': [recall[2]],
+            'F1_Class_0': [f1[0]],
+            'F1_Class_1': [f1[1]],
+            'F1_Class_2': [f1[2]],
             'MAE': [mae]  # Include MAE in the DataFrame
         })
 
