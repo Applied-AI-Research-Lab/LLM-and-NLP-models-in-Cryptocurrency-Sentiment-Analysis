@@ -26,13 +26,13 @@ class EvaluationMethods:
 
         # Calculate precision, recall, and F1-score for each class separately
         precision = precision_score(data[original], data[prediction], average=None)
-        precision = [round(p, 2) for p in precision]
+        precision = [round(p, 3) for p in precision]
 
         recall = recall_score(data[original], data[prediction], average=None)
-        recall = [round(r, 2) for r in recall]
+        recall = [round(r, 3) for r in recall]
 
         f1 = f1_score(data[original], data[prediction], average=None)
-        f1 = [round(f, 2) for f in f1]
+        f1 = [round(f, 3) for f in f1]
 
         # Calculate Mean Absolute Error (MAE) for regression evaluation
         mae = mean_absolute_error(data[original], data[prediction])
