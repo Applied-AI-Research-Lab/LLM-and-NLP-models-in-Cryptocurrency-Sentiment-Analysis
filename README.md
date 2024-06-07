@@ -2,8 +2,8 @@
 
 ## Under Review Paper
 * **Journal**: [Big Data and Cognitive Computing | An Open Access Journal from MDPI](https://www.mdpi.com/journal/BDCC)
-* **Title**: LLM and NLP models in Cryptocurrency Sentiment Analysis: A Comparative Classification Study
-* **DOI**: Pending
+* **Title**: [LLMs and NLP Models in Cryptocurrency Sentiment Analysis: A Comparative Classification Study](https://www.mdpi.com/2504-2289/8/6/63) 
+* **DOI**: [https://doi.org/10.3390/bdcc8060063](https://doi.org/10.3390/bdcc8060063)
 
 ## Authors
 * **Konstantinos I. Roumeliotis**
@@ -11,10 +11,10 @@
 * **Prof. Dimitrios K. Nasiopoulos**
 
 ## Abstract
-Pending
+Cryptocurrencies are becoming increasingly prominent in financial investments, with more investors diversifying their portfolios and individuals drawn to their ease of use and decentralized financial opportunities. However, this accessibility also brings significant risks and rewards, often influenced by news and the sentiments of crypto investors, known as crypto signals. This paper explores the capabilities of large language models (LLMs) and natural language processing (NLP) models in analyzing sentiment from cryptocurrency-related news articles. We fine-tune state-of-the-art models such as GPT-4, BERT, and FinBERT for this specific task, evaluating their performance and comparing their effectiveness in sentiment classification. By leveraging these advanced techniques, we aim to enhance the understanding of sentiment dynamics in the cryptocurrency market, providing insights that can inform investment decisions and risk management strategies. The outcomes of this comparative study contribute to the broader discourse on applying advanced NLP models to cryptocurrency sentiment analysis, with implications for both academic research and practical applications in financial markets.
 
 ## Keywords
-Pending
+cryptocurrency sentiment analysis; cryptocurrency classification; news sentiment analysis; llms cryptocurrency; nlp cryptocurrency; crypto signals; trading signals; cryptocurrency news; news classification
 
 ## Methodology
 This research investigates the effectiveness of large language models (LLMs), particularly GPT-4, for sentiment analysis in the cryptocurrency sector and compares its performance with other NLP models like BERT and FinBERT. To achieve this, we used the [Crypto+](https://www.kaggle.com/datasets/oliviervha/crypto-news) dataset from Kaggle, specifically curated for sentiment analysis tasks in cryptocurrency.
