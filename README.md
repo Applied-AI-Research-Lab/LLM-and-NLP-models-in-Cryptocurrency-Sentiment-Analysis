@@ -1,6 +1,6 @@
 # LLM and NLP models in Cryptocurrency Sentiment Analysis: A Comparative Classification Study
 
-## Under Review Paper
+## Published Paper
 * **Journal**: [Big Data and Cognitive Computing | An Open Access Journal from MDPI](https://www.mdpi.com/journal/BDCC)
 * **Title**: [LLMs and NLP Models in Cryptocurrency Sentiment Analysis: A Comparative Classification Study](https://www.mdpi.com/2504-2289/8/6/63) 
 * **DOI**: [https://doi.org/10.3390/bdcc8060063](https://doi.org/10.3390/bdcc8060063)
